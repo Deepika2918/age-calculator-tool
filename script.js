@@ -2,22 +2,36 @@ function calculateAge() {
 
     let dob = document.getElementById("dob").value;
 
-    if(!dob){
-        alert("Please select your Date of Birth");
+    if (!dob) {
+        alert("Please select Date of Birth");
         return;
     }
 
     let birthDate = new Date(dob);
     let today = new Date();
 
-    let age = today.getFullYear() - birthDate.getFullYear();
+    let years =
+        today.getFullYear() -
+        birthDate.getFullYear();
 
-    let monthDiff = today.getMonth() - birthDate.getMonth();
+    let months =
+        years * 12 +
+        (today.getMonth() - birthDate.getMonth());
 
-    if(monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())){
-        age--;
-    }
+    let days =
+        Math.floor(
+            (today - birthDate) /
+            (1000 * 60 * 60 * 24)
+        );
 
     document.getElementById("result").innerHTML =
-        "Your Age is " + age + " years";
+        `
+        <h3>Your Age</h3>
+
+        <p><b>Years:</b> ${years}</p>
+
+        <p><b>Months:</b> ${months}</p>
+
+        <p><b>Days:</b> ${days}</p>
+        `;
 }
